@@ -13,7 +13,7 @@ architecture rtl of multisegment is
 
 	component segment is
 		port(
-			i_bin: in std_logic_vector(7 downto 0);
+			i_bin: in std_logic_vector(3 downto 0);
 			o_bcd: out std_logic_vector(6 downto 0)
 		);
 	end component segment;
