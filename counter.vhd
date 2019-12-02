@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use work.segment_pkg.all;
 
 
 entity counter is
@@ -11,8 +12,7 @@ entity counter is
         previous_address: in std_logic;
         load_address: in std_logic;
         o_bin: out std_logic_vector(7 downto 0);
-        o_hex_lobyte: out std_logic_vector(6 downto 0);
-        o_hex_hibyte: out std_logic_vector(6 downto 0)
+        o_hex_addr: out address_segment
     );
 end entity counter;
 
@@ -37,7 +37,6 @@ architecture rtl of counter is
 
     
     constant segment1_mask: unsigned(12 downto 0) := "0000000001111";
-    constant segment2_mask: unsigned(12 downto 0) := "0000011110000";
 begin
 
     process (clk, reset)
@@ -62,12 +61,16 @@ begin
     
     
     address7b <= std_logic_vector(resize(unsigned(address), address7b'length));
-    temp_address <= address and segment1_mask;
-    segment_display1 <= std_logic_vector(resize(unsigned(temp_address), segment_display1'length));
-    temp_address2 <= shift_right(address, 4) and segment1_mask;
-    segment_display2 <= std_logic_vector(resize(unsigned(temp_address2), segment_display2'length));
-    segment1: segment port map(segment_display1, o_hex_lobyte);
-    segment2: segment port map(segment_display2, o_hex_hibyte);
+    --temp_address <= address and segment1_mask;
+    --segment_display1 <= std_logic_vector(resize(unsigned(temp_address), segment_display1'length));
+
+    --temp_address2 <= shift_right(address, 4) and segment1_mask;
+    --segment_display2 <= std_logic_vector(resize(unsigned(temp_address2), segment_display2'length));
+    
+    segment_display1 <= segmentmask(address);
+    segment_display2 <= segmentmask(shift_right(address, 4));
+    segment1: segment port map(segment_display1, o_hex_addr.lobyte);
+    segment2: segment port map(segment_display2, o_hex_addr.hibyte);
     
     o_bin <= address7b;
     

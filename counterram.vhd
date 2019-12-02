@@ -1,5 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use work.segment_pkg.all;
+
 
 entity counterram is
 	port(
@@ -9,8 +11,7 @@ entity counterram is
 		next_address: in std_logic;
 		previous_address: in std_logic;
         o_bin_led: out std_logic_vector(7 downto 0);
-        o_hex_addr_led_lobyte: out std_logic_vector(6 downto 0);
-        o_hex_addr_led_hibyte: out std_logic_vector(6 downto 0)
+        o_hex_addr: out address_segment
 	);
 end entity counterram;
 
@@ -35,8 +36,7 @@ architecture rtl of counterram is
             previous_address: in std_logic;
             load_address: in std_logic;
             o_bin: out std_logic_vector(7 downto 0);
-            o_hex_lobyte: out std_logic_vector(6 downto 0);
-            o_hex_hibyte: out std_logic_vector(6 downto 0)
+            o_hex_addr: out address_segment
         );
     end component counter;
     
@@ -47,6 +47,6 @@ begin
 	--d3: debounce port map(clk, previous_address, s_previous_address);
 
     
-    c1: counter port map(clk, '1', next_address, previous_address, s_load_value, o_bin_led, o_hex_addr_led_lobyte, o_hex_addr_led_hibyte);
+    c1: counter port map(clk, '1', next_address, previous_address, s_load_value, o_bin_led, o_hex_addr);
     
 end architecture;
