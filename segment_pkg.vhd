@@ -13,7 +13,7 @@ package segment_pkg is
     
     type address_out is record
         ds: std_logic_vector(3 downto 0);
-		o_bcd: std_logic_vector(6 downto 0);
+        o_bcd: std_logic_vector(6 downto 0);
     end record;
     
     function segmentmask(address: unsigned(15 downto 0)) return std_logic_vector;

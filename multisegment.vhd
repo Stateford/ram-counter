@@ -4,24 +4,24 @@ use ieee.numeric_std.all;
 use work.segment_pkg.all;
 
 entity multisegment is
-	port(
+    port(
         clk_16mhz: in std_logic;
-		i_bin: in std_logic_vector(15 downto 0);
+        i_bin: in std_logic_vector(15 downto 0);
         address_output: out address_out
-	);
+    );
 end entity multisegment;
 
 architecture rtl of multisegment is
 
-	component segment is
-		port(
-			i_bin: in std_logic_vector(3 downto 0);
-			o_bcd: out std_logic_vector(6 downto 0)
-		);
-	end component segment;
-	
-	type digit_select is (ONE, TWO, THREE, FOUR);
-	signal digit_selector: digit_select := ONE;
+    component segment is
+        port(
+            i_bin: in std_logic_vector(3 downto 0);
+            o_bcd: out std_logic_vector(6 downto 0)
+        );
+    end component segment;
+
+    type digit_select is (ONE, TWO, THREE, FOUR);
+    signal digit_selector: digit_select := ONE;
     signal bcd: std_logic_vector(3 downto 0);
     signal dselector: std_logic_vector(3 downto 0) := "1110";
 begin
@@ -58,7 +58,7 @@ begin
     end process;
     
     address_output.ds <= dselector;
-	s1: segment port map(bcd, address_output.o_bcd);
+    s1: segment port map(bcd, address_output.o_bcd);
 
     
 end architecture;
