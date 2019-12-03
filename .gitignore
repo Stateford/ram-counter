@@ -5,3 +5,7 @@ incremental_db/
 *.qws
 *.rpt
 simulation/
+greybox_tmp/
+*.qip
+*.ppf
+*.cmp

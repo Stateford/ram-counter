@@ -4,7 +4,7 @@ use work.segment_pkg.all;
 
 entity segment is
     generic(
-        seg_type: segment_type := COMMON_CATTHODE
+        seg_type: segment_type := COMMON_CATHODE
     );
 	port(
 		i_bin: in std_logic_vector(3 downto 0);
@@ -13,8 +13,9 @@ entity segment is
 end entity segment;
 
 architecture Behavioral of segment is
+    
     signal bcd: std_logic_vector(6 downto 0);
-    constant MASK: std_logic_vector(6 downto 0) := (others <= '1');
+    constant MASK: std_logic_vector(6 downto 0) := (others => '1');
 begin
 
 	with (i_bin) select
@@ -37,10 +38,11 @@ begin
                     "1000111" when x"F",
 				    "0000000" when others;
                     
-    if seg_type = COMMON_CATTHODE then
-        o_bcd <= bcd;
-    else
-        o_bcd <= ((not bcd) and MASK);
-    end if;
+    with (seg_type) select
+        o_bcd <= bcd when COMMON_CATHODE,
+                 ((not bcd) and MASK) when COMMON_ANNODE,
+                 (others => '0') when others;
+    
+                    
 	
 end architecture Behavioral;
