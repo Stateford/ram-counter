@@ -5,9 +5,9 @@ use work.segment_pkg.all;
 
 entity multisegment is
     port(
-        clk_16mhz: in std_logic;
-        i_bin: in std_logic_vector(15 downto 0);
-        address_output: out address_out
+        clk_16mhz:          in std_logic;
+        i_bin:              in std_logic_vector(15 downto 0);
+        address_output:     out address_out
     );
 end entity multisegment;
 

@@ -14,8 +14,8 @@ end entity segment;
 
 architecture Behavioral of segment is
     
-    signal bcd: std_logic_vector(6 downto 0);
-    constant MASK: std_logic_vector(6 downto 0) := (others => '1');
+    signal bcd:     std_logic_vector(6 downto 0);
+    constant MASK:  std_logic_vector(6 downto 0) := (others => '1');
 begin
 
     with (i_bin) select

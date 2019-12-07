@@ -12,7 +12,7 @@ package segment_pkg is
     end record;
     
     type address_out is record
-        ds: std_logic_vector(3 downto 0);
+        ds:    std_logic_vector(3 downto 0);
         o_bcd: std_logic_vector(6 downto 0);
     end record;
     

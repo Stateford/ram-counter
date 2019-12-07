@@ -103,4 +103,6 @@ set_instance_assignment -name IO_STANDARD "2.5 V" -to o_hex_addr_out.o_bcd[3]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to o_hex_addr_out.o_bcd[2]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to o_hex_addr_out.o_bcd[1]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to o_hex_addr_out.o_bcd[0]
+set_global_assignment -name VHDL_FILE sdram.vhd
+set_global_assignment -name VHDL_FILE sdram_pkg.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
